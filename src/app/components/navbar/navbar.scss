@@ -1,0 +1,149 @@
+a {
+  text-decoration: none;
+}
+
+nav {
+  height: 5.6rem;
+  background-color: var(--bg-secondary);
+
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding-inline: 2.4rem;
+}
+
+.logo {
+  display: flex;
+
+  outline: 0px solid var(--primary);
+  outline-offset: 6px;
+  border-radius: 2px;
+
+  transition:
+    opacity 0.2s,
+    outline 0.1s;
+
+  &:hover {
+    opacity: 0.6;
+  }
+
+  &:focus-visible {
+    outline-width: 2px;
+  }
+}
+
+.links {
+  list-style: none;
+  display: flex;
+
+  gap: 2.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.link {
+  display: flex;
+
+  outline: 0px solid var(--white);
+  outline-offset: 6px;
+  border-radius: 2px;
+
+  transition:
+    filter 0.2s,
+    outline 0.1s;
+
+  &:hover,
+  &:focus-visible,
+  &.active {
+    filter: brightness(0) invert(1);
+  }
+
+  &:focus-visible {
+    outline-width: 2px;
+  }
+}
+
+.profile {
+  display: flex;
+  width: 2.8rem;
+  aspect-ratio: 1;
+
+  border-radius: 100vmax;
+
+  border: 2px solid var(--white);
+
+  transition:
+    border-color 0.2s,
+    outline 0.1s;
+
+  outline: 0px solid var(--primary);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &:hover,
+  &:focus-visible {
+    border-color: var(--primary);
+  }
+
+  &:focus-visible {
+    outline-width: 4px;
+  }
+}
+
+// Tablet View
+
+@media (min-width: 768px) {
+  nav {
+    height: 7.2rem;
+    border-radius: 1rem;
+    margin-inline: auto;
+    width: calc(100% - 5rem);
+  }
+
+  .profile {
+    width: 3.6rem;
+  }
+}
+
+// Desktop View
+
+@media (min-width: 1440px) {
+  :host {
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+    padding: 0;
+  }
+
+  nav {
+    border-radius: 2rem;
+    width: 9.6rem;
+    height: calc(100% - 6.4rem);
+
+    padding: 3.5rem 0;
+
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    justify-items: center;
+    align-items: start;
+
+    gap: 7.5rem;
+  }
+
+  .links {
+    flex-direction: column;
+    gap: 4rem;
+  }
+
+  .profile {
+    width: 4.4rem;
+  }
+}

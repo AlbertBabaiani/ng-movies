@@ -1,0 +1,22 @@
+<nav>
+  <a routerLink="/" class="logo">
+    <img src="assets/images/shared/logo.svg" alt="Logo" />
+  </a>
+
+  <ul class="links">
+    @for (link of links; track link.path) {
+      <li class="link-block">
+        <a [routerLink]="link.path" class="link" routerLinkActive="active">
+          <img
+            [src]="'assets/images/shared/icon-nav-' + link.label + '.svg'"
+            [alt]="link.altText"
+          />
+        </a>
+      </li>
+    }
+  </ul>
+
+  <a routerLink="/profile" class="profile">
+    <img src="assets/images/shared/image-avatar.png" alt="Profile Image" />
+  </a>
+</nav>
