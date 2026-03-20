@@ -17,6 +17,11 @@ export const routes: Routes = [
     loadComponent: () => import('./features/movies/movies').then((c) => c.Movies),
   },
   {
+    path: 'tv-series',
+    title: 'TV Series',
+    loadComponent: () => import('./features/tv-series/tv-series').then((c) => c.TvSeries),
+  },
+  {
     path: '**',
     redirectTo: 'home',
   },
