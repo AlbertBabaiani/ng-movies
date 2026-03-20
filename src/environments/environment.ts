@@ -1,5 +1,5 @@
 export const environment = {
-  production: false,
+  production: true,
   firebaseConfig: {
     apiKey: 'AIzaSyBRCm0JCmDJFN38GRaO_hQDbV1nxxgdUNw',
     authDomain: 'ng-movies-7d44c.firebaseapp.com',
