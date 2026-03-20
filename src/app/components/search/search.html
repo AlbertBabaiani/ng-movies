@@ -1,3 +1,10 @@
 <img class="search-icon" src="assets/images/shared/icon-search.svg" alt="Search" />
 
-<input type="text" placeholder="Search for movies or TV series" />
+<input
+  type="text"
+  [(ngModel)]="search"
+  (input)="enterSearch()"
+  [placeholder]="'Search for ' + title()"
+/>
+
+<span class="line" [class.entered]="search().trim().length"></span>
