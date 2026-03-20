@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, signal } from '@angular/core';
-import { MediaItem } from '../shared/mediaItem';
+import { computed, inject, Injectable, signal } from '@angular/core';
+import { MediaItem } from '../shared/models/mediaItem';
 import { addDoc, collection, collectionData, Firestore } from '@angular/fire/firestore';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Observable } from 'rxjs';
@@ -19,4 +19,6 @@ export class MediaService {
   >;
 
   media = toSignal(this.media$, { initialValue: [] });
+
+  trendings = computed(() => this.media().filter((m) => m.isTrending));
 }

@@ -1,0 +1,9 @@
+<h2 class="section-title">Trending</h2>
+
+<swiper-container slides-per-view="auto" free-mode="true" [breakpoints]="swiperBreakpoints">
+  @for (media of trendings(); track media.id) {
+    <swiper-slide class="slide">
+      <app-media-card [media]="media" [trending]="true" />
+    </swiper-slide>
+  }
+</swiper-container>

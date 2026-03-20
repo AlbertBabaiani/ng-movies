@@ -1,9 +1,10 @@
 import { Component, input } from '@angular/core';
-import { MediaItem } from '../../../shared/mediaItem';
+import { MediaItem } from '../../../shared/models/mediaItem';
+import { MediaCard } from '../../../shared/components/media-card/media-card';
 
 @Component({
   selector: 'section[app-recommendation]',
-  imports: [],
+  imports: [MediaCard],
   templateUrl: './recommendation.html',
   styleUrl: './recommendation.scss',
 })

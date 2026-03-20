@@ -2,42 +2,6 @@
 
 <div class="media-grid">
   @for (media of media(); track media.id) {
-    <div class="media">
-      <div class="thumbnail-wrapper">
-        <picture>
-          <source media="(min-width: 1024px)" [srcset]="media.thumbnail.regular.large" />
-          <source media="(min-width: 768px)" [srcset]="media.thumbnail.regular.medium" />
-          <img
-            class="thumbnail"
-            [src]="media.thumbnail.regular.small"
-            [alt]="`Thumbnail of ${media.title}`"
-          />
-        </picture>
-
-        <button type="button" class="bookmark-btn">
-          <img src="assets/images/shared/icon-bookmark-empty.svg" alt="" />
-        </button>
-      </div>
-
-      <div class="media-description">
-        <div class="media-info">
-          <span class="media-info-block">{{ media.year }}</span>
-          <span class="dot"></span>
-          <span class="media-info-block category-icon">
-            <img
-              [src]="
-                `assets/images/shared/icon-nav-${media.category === 'Movie' ? 'movies' : 'tv-series'}.svg`
-              "
-              alt="Category"
-            />
-            {{ media.category }}</span
-          >
-          <span class="dot"></span>
-          <span class="media-info-block">{{ media.rating }}</span>
-        </div>
-
-        <p class="media-title">{{ media.title }}</p>
-      </div>
-    </div>
+    <app-media-card [media]="media" />
   }
 </div>

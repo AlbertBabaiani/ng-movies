@@ -1,0 +1,27 @@
+:host {
+  padding-left: var(--px);
+
+  @media (min-width: 1440px) {
+    padding: 0;
+  }
+}
+
+h2 {
+  margin-bottom: 1.6rem;
+
+  @media (min-width: 768px) {
+    margin-bottom: 2.5rem;
+  }
+}
+
+.slide {
+  width: 24rem;
+
+  &:last-of-type {
+    margin-right: var(--px);
+  }
+
+  @media (min-width: 768px) {
+    width: clamp(47rem, 62vw, 50rem);
+  }
+}

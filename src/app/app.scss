@@ -33,6 +33,7 @@ main {
   // }
 
   @media (min-width: 1440px) {
+    padding-top: var(--px);
     height: 100vh;
     height: 100dvh;
   }
