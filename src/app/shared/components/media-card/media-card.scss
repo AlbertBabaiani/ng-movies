@@ -9,11 +9,11 @@
   @media (min-width: 768px) {
     height: 14rem;
     height: 20vw;
-    height: clamp(14rem, 20vw, 24rem);
+    height: clamp(14rem, 20vw, 20rem);
   }
 
   @media (min-width: 1440px) {
-    height: clamp(17.4rem, 13vw, 28rem);
+    height: clamp(17.4rem, 14vw, 24rem);
   }
 }
 
@@ -144,7 +144,7 @@
     height: clamp(14rem, 37vw, 17rem);
 
     @media (min-width: 768px) {
-      height: clamp(23rem, 19vw, 26rem);
+      height: clamp(23rem, 21vw, 26rem);
     }
   }
 
