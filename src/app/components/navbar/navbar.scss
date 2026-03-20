@@ -12,7 +12,7 @@ nav {
 
   align-items: center;
 
-  padding-inline: 2.4rem;
+  padding-inline: var(--px);
 }
 
 .logo {
@@ -104,7 +104,7 @@ nav {
     height: 7.2rem;
     border-radius: 1rem;
     margin-inline: auto;
-    width: calc(100% - 5rem);
+    width: calc(100% - var(--px) - var(--px));
   }
 
   .profile {
@@ -116,7 +116,9 @@ nav {
 
 @media (min-width: 1440px) {
   :host {
-    height: 100%;
+    height: 100vh;
+    height: 100dvh;
+
     display: flex;
     align-items: center;
 
@@ -126,9 +128,8 @@ nav {
   nav {
     border-radius: 2rem;
     width: 9.6rem;
-    height: calc(100% - 6.4rem);
-
-    padding: 3.5rem 0;
+    height: calc(100% - var(--px) - var(--px));
+    padding: var(--px) 0;
 
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr auto;

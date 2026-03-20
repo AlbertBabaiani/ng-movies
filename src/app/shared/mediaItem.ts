@@ -1,4 +1,5 @@
 export interface MediaItem {
+  id?: string;
   title: string;
   thumbnail: {
     regular: string[];

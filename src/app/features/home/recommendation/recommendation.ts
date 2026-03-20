@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
+import { MediaItem } from '../../../shared/mediaItem';
 
 @Component({
   selector: 'app-recommendation',
@@ -7,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './recommendation.scss',
 })
 export class Recommendation {
-
+  media = input.required<MediaItem[]>();
 }

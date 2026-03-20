@@ -10,4 +10,6 @@ import { MediaService } from '../../core/media-service';
 })
 export class Home {
   private mediaService = inject(MediaService);
+
+  media = this.mediaService.media;
 }

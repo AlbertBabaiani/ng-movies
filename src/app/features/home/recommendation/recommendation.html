@@ -1,19 +1,21 @@
 <h2>Recommended for you</h2>
 
 <div class="movies">
-  <div class="movie">
-    <div class="movie-img-wrapper">
-      <img src="assets/thumbnails/the-great-lands/regular/medium.jpg" alt="" />
+  @for (media of media(); track media.id) {
+    <div class="movie">
+      <div class="movie-img-wrapper">
+        <img src="assets/thumbnails/the-great-lands/regular/medium.jpg" alt="" />
 
-      <button type="button" class="bookmark-btn">
-        <img src="assets/images/shared/icon-bookmark-empty.svg" alt="" />
-      </button>
+        <button type="button" class="bookmark-btn">
+          <img src="assets/images/shared/icon-bookmark-empty.svg" alt="" />
+        </button>
+      </div>
+
+      <div class="movie-description">
+        <!-- <img src="../../../../assets/images/shared/" alt="" /> -->
+
+        <p class="movie-title">The Great Lands</p>
+      </div>
     </div>
-
-    <div class="movie-description">
-      <!-- <img src="../../../../assets/images/shared/" alt="" /> -->
-
-      <p class="movie-title">The Great Lands</p>
-    </div>
-  </div>
+  }
 </div>
