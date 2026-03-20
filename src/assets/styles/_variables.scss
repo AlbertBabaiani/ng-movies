@@ -20,3 +20,31 @@
     --px: 3.2rem;
   }
 }
+
+.media-grid {
+  display: grid;
+  gap: 1.6rem;
+
+  grid-template-columns: 1fr 1fr;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2.9rem;
+  }
+
+  @media (min-width: 1440px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 4rem;
+  }
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 300;
+  letter-spacing: -0.5px;
+  color: var(--text-color);
+
+  @media (min-width: 768px) {
+    font-size: 3.2rem;
+  }
+}

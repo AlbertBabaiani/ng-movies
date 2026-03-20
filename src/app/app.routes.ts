@@ -8,7 +8,13 @@ export const routes: Routes = [
   },
   {
     path: 'home',
-    loadComponent: () => import('./features/home/home').then((m) => m.Home),
+    title: 'Home',
+    loadComponent: () => import('./features/home/home').then((c) => c.Home),
+  },
+  {
+    path: 'movies',
+    title: 'Movies',
+    loadComponent: () => import('./features/movies/movies').then((c) => c.Movies),
   },
   {
     path: '**',

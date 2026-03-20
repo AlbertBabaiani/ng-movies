@@ -1,11 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { Recommendation } from './recommendation/recommendation';
 import { MediaService } from '../../core/media-service';
 import { Trending } from './trending/trending';
+import { MediaGrid } from '../../shared/components/media-grid/media-grid';
 
 @Component({
   selector: 'app-home',
-  imports: [Recommendation, Trending],
+  imports: [Trending, MediaGrid],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
