@@ -2,7 +2,7 @@ import { Component, input } from '@angular/core';
 import { MediaItem } from '../../../shared/mediaItem';
 
 @Component({
-  selector: 'app-recommendation',
+  selector: 'section[app-recommendation]',
   imports: [],
   templateUrl: './recommendation.html',
   styleUrl: './recommendation.scss',

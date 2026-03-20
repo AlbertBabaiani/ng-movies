@@ -2,7 +2,16 @@ export interface MediaItem {
   id?: string;
   title: string;
   thumbnail: {
-    regular: string[];
+    regular: {
+      small: string;
+      medium?: string;
+      large?: string;
+    };
+    trending?: {
+      small: string;
+      medium?: string;
+      large?: string;
+    };
   };
   year: number;
   category: 'Movie' | 'TV Series';
