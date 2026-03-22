@@ -1,8 +1,13 @@
 :host {
   padding-left: var(--px);
+  padding-bottom: 2.4rem;
+
+  @media (min-width: 768px) {
+    padding-bottom: 4rem;
+  }
 
   @media (min-width: 1440px) {
-    padding: 0;
+    padding-left: 0;
   }
 }
 
@@ -23,5 +28,53 @@ h2 {
 
   @media (min-width: 768px) {
     width: clamp(47rem, 62vw, 50rem);
+  }
+}
+
+.wrapper {
+  padding-right: var(--px);
+}
+
+.trending-empty-state {
+  width: 100%;
+  min-height: 10rem;
+
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 0.8rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  padding: 4.8rem 1.6rem;
+
+  h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--white);
+  }
+
+  p {
+    max-width: 30rem;
+    color: #8c92b3;
+    line-height: 1.5;
+    font-size: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    min-height: 24rem;
+    padding: 6rem 2.4rem;
+
+    h3 {
+      font-size: 2.4rem;
+      margin-bottom: 1.4rem;
+    }
+
+    p {
+      max-width: 40rem;
+      font-size: 1.6rem;
+    }
   }
 }

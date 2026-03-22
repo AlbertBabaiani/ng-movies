@@ -1,9 +1,22 @@
 <h2 class="section-title">Trending</h2>
 
-<swiper-container slides-per-view="auto" free-mode="true" [breakpoints]="swiperBreakpoints">
-  @for (media of trendings(); track media.id) {
-    <swiper-slide class="slide">
-      <app-media-card [media]="media" [trending]="true" />
-    </swiper-slide>
-  }
-</swiper-container>
+@if (trendings().length > 0) {
+  <swiper-container slides-per-view="auto" [breakpoints]="swiperBreakpoints" free-mode="true">
+    @for (media of trendings(); track media.id) {
+      <swiper-slide class="slide">
+        <app-media-card
+          [media]="media"
+          [trending]="true"
+          [style.animation-delay]="$index * 0.05 + 's'"
+        />
+      </swiper-slide>
+    }
+  </swiper-container>
+} @else {
+  <div class="wrapper">
+    <div class="trending-empty-state">
+      <h3>Nothing trending right now</h3>
+      <p>Check back later to see what movies and shows are heating up!</p>
+    </div>
+  </div>
+}

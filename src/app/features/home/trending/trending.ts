@@ -16,7 +16,7 @@ register();
 export class Trending {
   trendings = input.required<MediaItem[]>();
 
-  public swiperBreakpoints = {
+  swiperBreakpoints = {
     0: {
       spaceBetween: 16,
     },

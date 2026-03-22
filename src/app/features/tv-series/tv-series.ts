@@ -11,5 +11,5 @@ import { MediaService } from '../../core/media-service';
 export class TvSeries {
   private mediaService = inject(MediaService);
 
-  tvSeries = this.mediaService.tvSeries;
+  tvSeries = this.mediaService.media;
 }

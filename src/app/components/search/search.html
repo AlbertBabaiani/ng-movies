@@ -2,9 +2,9 @@
 
 <input
   type="text"
-  [(ngModel)]="search"
-  (input)="enterSearch()"
+  [ngModel]="searchValue()"
+  (ngModelChange)="updateSearch($event)"
   [placeholder]="'Search for ' + title()"
 />
 
-<span class="line" [class.entered]="search().trim().length"></span>
+<span class="line" [class.entered]="searchValue().trim().length"></span>

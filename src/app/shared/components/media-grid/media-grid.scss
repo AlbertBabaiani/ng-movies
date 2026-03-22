@@ -1,8 +1,9 @@
 :host {
-  padding: 2.6rem var(--px);
+  padding: 0 var(--px) 2.6rem;
 
   @media (min-width: 768px) {
-    padding-block: 4rem;
+    padding-top: 0;
+    padding-bottom: 4rem;
   }
 
   @media (min-width: 1440px) {
@@ -15,5 +16,56 @@ h2 {
 
   @media (min-width: 1440px) {
     margin-bottom: 3.2rem;
+  }
+}
+
+.empty-state {
+  grid-column: 1 / -1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  padding: 4.8rem 1.6rem;
+
+  .empty-icon {
+    width: 4.8rem;
+    aspect-ratio: 1;
+    margin-bottom: 1.6rem;
+    opacity: 0.3;
+  }
+
+  h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--white);
+  }
+
+  p {
+    max-width: 30rem;
+    color: #8c92b3;
+    line-height: 1.5;
+    font-size: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    padding: 6rem 2.4rem;
+
+    .empty-icon {
+      width: 7rem;
+      margin-bottom: 2.4rem;
+    }
+
+    h3 {
+      font-size: 2.4rem;
+      margin-bottom: 1.4rem;
+    }
+
+    p {
+      max-width: 40rem;
+      font-size: 16px;
+    }
   }
 }

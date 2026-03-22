@@ -1,5 +1,6 @@
-import { Component, input, output, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MediaService } from '../../core/media-service';
 
 @Component({
   selector: 'section[app-search]',
@@ -8,17 +9,15 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './search.scss',
 })
 export class Search {
-  title = input.required<string>();
+  private service = inject(MediaService);
 
-  search = signal('');
+  title = this.service.title;
 
-  searchMedia = output<string>();
+  searchValue = this.service.searchedWord;
 
-  enterSearch() {
-    const trimmedSearch = this.search().trim();
+  updateSearch(value: string) {
+    const trimmedSearch = value.trim();
 
-    if (!trimmedSearch.length) return;
-
-    this.searchMedia.emit(trimmedSearch);
+    this.service.searchedWord.set(trimmedSearch);
   }
 }

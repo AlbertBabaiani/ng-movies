@@ -1,7 +1,13 @@
 <h2 class="section-title">{{ title() }}</h2>
 
 <div class="media-grid">
-  @for (media of media(); track media.id) {
-    <app-media-card [media]="media" />
+  @for (media of media(); track media.id; let i = $index) {
+    <app-media-card class="card" [media]="media" [style.animation-delay]="i * 0.05 + 's'" />
+  } @empty {
+    <div class="empty-state">
+      <img src="assets/images/shared/icon-search.svg" alt="Search icon" class="empty-icon" />
+      <h3 class="heading-l">No results found</h3>
+      <p class="body-m">We couldn't find what you're looking for. Try adjusting your search.</p>
+    </div>
   }
 </div>
