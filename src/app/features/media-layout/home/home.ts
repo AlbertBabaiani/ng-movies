@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
-import { MediaService } from '../../core/media-service';
+import { MediaService } from '../../../core/media-service';
 import { Trending } from './trending/trending';
-import { MediaGrid } from '../../shared/components/media-grid/media-grid';
+import { MediaGrid } from '../../../shared/components/media-grid/media-grid';
 
 @Component({
   selector: 'app-home',
@@ -13,5 +13,5 @@ export class Home {
   private mediaService = inject(MediaService);
 
   media = this.mediaService.media;
-  trendings = this.mediaService.trendings;
+  trending = this.mediaService.trending;
 }

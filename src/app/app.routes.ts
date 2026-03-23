@@ -2,28 +2,18 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
+    path: 'sign-up',
+    title: 'Sign Up',
+    loadComponent: () => import('./features/auth/signup/signup').then((c) => c.Signup),
+  },
+  {
+    path: 'sign-in',
+    title: 'Sign In',
+    loadComponent: () => import('./features/auth/signin/signin').then((c) => c.Signin),
+  },
+  {
     path: '',
-    redirectTo: 'home',
-    pathMatch: 'full',
-  },
-  {
-    path: 'home',
-    title: 'Home',
-    loadComponent: () => import('./features/home/home').then((c) => c.Home),
-  },
-  {
-    path: 'movies',
-    title: 'Movies',
-    loadComponent: () => import('./features/movies/movies').then((c) => c.Movies),
-  },
-  {
-    path: 'tv-series',
-    title: 'TV Series',
-    loadComponent: () => import('./features/tv-series/tv-series').then((c) => c.TvSeries),
-  },
-  { path: 'auth', loadComponent: () => import('./features/auth/auth').then((c) => c.Auth) },
-  {
-    path: '**',
-    redirectTo: 'home',
+    loadChildren: () =>
+      import('../app/features/media-layout/media.routes').then((r) => r.MEDIA_ROUTES),
   },
 ];

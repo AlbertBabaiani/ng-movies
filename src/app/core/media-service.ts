@@ -69,5 +69,5 @@ export class MediaService {
     }),
   );
 
-  trendings = computed(() => this.media().filter((m) => m.isTrending));
+  trending = computed(() => this.media().filter((m) => m.isTrending));
 }

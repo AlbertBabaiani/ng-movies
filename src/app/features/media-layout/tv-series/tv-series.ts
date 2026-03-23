@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { MediaGrid } from '../../shared/components/media-grid/media-grid';
-import { MediaService } from '../../core/media-service';
+import { MediaGrid } from '../../../shared/components/media-grid/media-grid';
+import { MediaService } from '../../../core/media-service';
 
 @Component({
   selector: 'app-tv-series',

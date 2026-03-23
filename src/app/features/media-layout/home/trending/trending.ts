@@ -1,8 +1,8 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, input } from '@angular/core';
-import { MediaCard } from '../../../shared/components/media-card/media-card';
+import { MediaCard } from '../../../../shared/components/media-card/media-card';
 
 import { register } from 'swiper/element/bundle';
-import { MediaItem } from '../../../shared/models/mediaItem';
+import { MediaItem } from '../../../../shared/models/mediaItem';
 
 register();
 
@@ -14,7 +14,7 @@ register();
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class Trending {
-  trendings = input.required<MediaItem[]>();
+  trending = input.required<MediaItem[]>();
 
   swiperBreakpoints = {
     0: {
