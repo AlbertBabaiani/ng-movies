@@ -16,8 +16,18 @@
     }
   </ul>
 
-  {{ user()?.email }}
-  <a routerLink="/profile" class="profile">
-    <img src="assets/images/shared/image-avatar.png" alt="Profile Image" />
-  </a>
+  <div class="profile-container">
+    <button class="profile-toggle" (click)="toggleMenu()" aria-label="Toggle user menu">
+      <img src="assets/images/shared/image-avatar.png" alt="Profile Image" />
+    </button>
+
+    @if (isMenuOpen()) {
+      <div class="profile-menu">
+        <p class="user-email">{{ userEmail() }}</p>
+        <hr class="divider" />
+
+        <button class="logout-btn" (click)="logout()">Logout</button>
+      </div>
+    }
+  </div>
 </nav>

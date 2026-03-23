@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../core/auth-service';
 
@@ -20,5 +20,21 @@ export class Navbar {
 
   private service = inject(AuthService);
 
-  user = this.service.currentUser;
+  isMenuOpen = signal(false);
+
+  userEmail = computed(() => this.service.currentUser()?.email ?? 'Guest');
+
+  toggleMenu() {
+    this.isMenuOpen.update((v) => !v);
+  }
+
+  closeMenu() {
+    this.isMenuOpen.set(false);
+  }
+
+  async logout() {
+    this.closeMenu();
+
+    await this.service.logout();
+  }
 }

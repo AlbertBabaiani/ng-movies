@@ -26,6 +26,10 @@ nav {
     opacity 0.2s,
     outline 0.1s;
 
+  img {
+    width: 3rem;
+  }
+
   &:hover {
     opacity: 0.6;
   }
@@ -66,34 +70,98 @@ nav {
   }
 }
 
-.profile {
+.profile-container {
+  position: relative;
   display: flex;
-  width: 2.8rem;
-  aspect-ratio: 1;
+  align-items: center;
+}
 
-  border-radius: 100vmax;
+.profile-toggle {
+  background: none;
+  border: 1px solid transparent;
+  padding: 0;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: border-color 0.2s ease;
 
-  border: 2px solid var(--white);
-
-  transition:
-    border-color 0.2s,
-    outline 0.1s;
-
-  outline: 0px solid var(--primary);
+  outline: unset;
 
   img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    display: block;
+    width: 3rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
   }
 
   &:hover,
-  &:focus-visible {
-    border-color: var(--primary);
+  &:focus {
+    border-color: white;
+  }
+}
+
+.profile-menu {
+  position: absolute;
+  top: calc(100% + var(--px));
+  right: 0;
+  background-color: var(--bg-secondary);
+  border-radius: 0.8rem;
+  padding: 2rem;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.5);
+  min-width: 20rem;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+
+  animation: slideDownAndFade 0.2s ease-out forwards;
+  transform-origin: top right;
+
+  @media (min-width: 768px) {
+    right: calc(var(--px) * -1);
+  }
+
+  @media (min-width: 1440px) {
+    right: unset;
+    left: 8rem;
+    top: unset;
+    bottom: calc(var(--px) * -1);
+  }
+}
+
+.user-email {
+  font-size: 1.4rem;
+  margin: 0;
+  word-break: break-all;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--secondary);
+  margin: 0;
+}
+
+.logout-btn {
+  background-color: transparent;
+  color: var(--white);
+  border: none;
+  padding: 0;
+  font-size: 1.5rem;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    color 0.2s,
+    outline 0.1s;
+
+  outline: 0px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 1px;
+
+  &:hover {
+    color: var(--primary);
   }
 
   &:focus-visible {
-    outline-width: 4px;
+    outline-width: 2px;
   }
 }
 
@@ -107,8 +175,12 @@ nav {
     width: calc(100% - var(--px) - var(--px));
   }
 
-  .profile {
-    width: 3.6rem;
+  .logo img {
+    width: 3.2rem;
+  }
+
+  .profile-toggle img {
+    width: 3.4rem;
   }
 }
 
@@ -144,7 +216,22 @@ nav {
     gap: 4rem;
   }
 
-  .profile {
-    width: 4.4rem;
+  .logo img {
+    width: 3.4rem;
+  }
+
+  .profile-toggle img {
+    width: 4rem;
+  }
+}
+
+@keyframes slideDownAndFade {
+  from {
+    opacity: 0;
+    transform: translateY(-1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
