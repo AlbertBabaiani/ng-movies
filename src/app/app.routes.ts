@@ -21,6 +21,7 @@ export const routes: Routes = [
     title: 'TV Series',
     loadComponent: () => import('./features/tv-series/tv-series').then((c) => c.TvSeries),
   },
+  { path: 'auth', loadComponent: () => import('./features/auth/auth').then((c) => c.Auth) },
   {
     path: '**',
     redirectTo: 'home',
