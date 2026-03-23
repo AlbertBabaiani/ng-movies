@@ -1,4 +1,4 @@
-import { inject, Injectable, signal } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   Auth,
@@ -9,6 +9,7 @@ import {
   User,
 } from '@angular/fire/auth';
 import { doc, Firestore, setDoc } from '@angular/fire/firestore';
+import { LoadingService } from './loading-service';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,11 @@ export class AuthService {
   private auth = inject(Auth);
   private firestore = inject(Firestore);
 
+  private loading = inject(LoadingService);
+
   currentUser = signal<User | null | undefined>(undefined);
+
+  isAuthenticated = computed(() => !!this.currentUser());
 
   constructor() {
     authState(this.auth)
@@ -28,6 +33,7 @@ export class AuthService {
   }
 
   async register(email: string, password: string) {
+    this.loading.startProcess();
     try {
       const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
       const user = userCredential.user;
@@ -41,14 +47,26 @@ export class AuthService {
       console.error('Registration failed', error);
       // Todo: add errors
       throw error;
+    } finally {
+      this.loading.stopProcess(); // 4. Always stop Spinner
     }
   }
 
   async login(email: string, password: string) {
-    return signInWithEmailAndPassword(this.auth, email, password);
+    this.loading.startProcess();
+    try {
+      return await signInWithEmailAndPassword(this.auth, email, password);
+    } finally {
+      this.loading.stopProcess();
+    }
   }
 
   async logout() {
-    return signOut(this.auth);
+    this.loading.startProcess();
+    try {
+      return await signOut(this.auth);
+    } finally {
+      this.loading.stopProcess();
+    }
   }
 }

@@ -1,7 +1,7 @@
 <div class="app-container">
   <header app-navbar></header>
 
-  <main>
+  <main *isLoading="isLoading()">
     <section app-search></section>
 
     <router-outlet />

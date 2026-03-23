@@ -2,9 +2,10 @@ import { computed, inject, Injectable, signal } from '@angular/core';
 import { MediaItem } from '../shared/models/mediaItem';
 import { collection, collectionData, Firestore } from '@angular/fire/firestore';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { Observable } from 'rxjs';
+import { defer, Observable } from 'rxjs';
 import { NavigationEnd, Router } from '@angular/router';
-import { filter, map, tap } from 'rxjs/operators';
+import { filter, finalize, map, tap } from 'rxjs/operators';
+import { LoadingService } from './loading-service';
 
 type Filter = 'movies-tv-series' | 'movies' | 'tv-series' | 'bookmarked';
 
@@ -12,14 +13,20 @@ type Filter = 'movies-tv-series' | 'movies' | 'tv-series' | 'bookmarked';
   providedIn: 'root',
 })
 export class MediaService {
+  private loading = inject(LoadingService);
+
   private firestore = inject(Firestore);
   private router = inject(Router);
 
   private mediaCollection = collection(this.firestore, 'media');
 
-  private media$ = collectionData(this.mediaCollection, { idField: 'id' }) as Observable<
-    MediaItem[]
-  >;
+  private media$ = defer(() => {
+    this.loading.startProcess();
+    return collectionData(this.mediaCollection, { idField: 'id' }) as Observable<MediaItem[]>;
+  }).pipe(
+    tap(() => this.loading.stopProcess()),
+    finalize(() => this.loading.stopProcess()),
+  );
 
   private routeFilter$ = this.router.events.pipe(
     filter((event): event is NavigationEnd => event instanceof NavigationEnd),
@@ -35,8 +42,10 @@ export class MediaService {
   );
 
   private filter = toSignal(this.routeFilter$, { initialValue: 'movies-tv-series' as Filter });
+  isLoading = this.loading.isLoading;
 
   searchedWord = signal('');
+
   title = computed(() => {
     if (this.filter() === 'movies') return 'movies';
     if (this.filter() === 'tv-series') return 'TV series';
