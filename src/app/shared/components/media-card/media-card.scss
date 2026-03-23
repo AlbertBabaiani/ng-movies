@@ -60,7 +60,8 @@
     transition: filter 0.2s;
   }
 
-  &:hover {
+  &:hover,
+  &.bookmarked {
     background-color: var(--white);
 
     img {

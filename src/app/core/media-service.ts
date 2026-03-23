@@ -1,11 +1,21 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { MediaItem } from '../shared/models/mediaItem';
-import { collection, collectionData, Firestore } from '@angular/fire/firestore';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { defer, Observable } from 'rxjs';
+import {
+  arrayRemove,
+  arrayUnion,
+  collection,
+  collectionData,
+  doc,
+  docData,
+  Firestore,
+  updateDoc,
+} from '@angular/fire/firestore';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { defer, Observable, of } from 'rxjs';
 import { NavigationEnd, Router } from '@angular/router';
-import { filter, finalize, map, tap } from 'rxjs/operators';
+import { filter, finalize, map, startWith, switchMap, tap } from 'rxjs/operators';
 import { LoadingService } from './loading-service';
+import { AuthService } from './auth-service';
 
 type Filter = 'movies-tv-series' | 'movies' | 'tv-series' | 'bookmarked';
 
@@ -13,6 +23,7 @@ type Filter = 'movies-tv-series' | 'movies' | 'tv-series' | 'bookmarked';
   providedIn: 'root',
 })
 export class MediaService {
+  private authService = inject(AuthService);
   private loading = inject(LoadingService);
 
   private firestore = inject(Firestore);
@@ -28,11 +39,23 @@ export class MediaService {
     finalize(() => this.loading.stopProcess()),
   );
 
+  private userBookmarks$ = toObservable(this.authService.currentUser).pipe(
+    switchMap((user) => {
+      if (!user) return of([]);
+      const userDoc = doc(this.firestore, `users/${user.uid}`);
+      ``;
+      return docData(userDoc).pipe(map((data: any) => data?.bookmarked || []));
+    }),
+  );
+
+  private bookmarkedIds = toSignal(this.userBookmarks$, { initialValue: [] });
+
   private routeFilter$ = this.router.events.pipe(
     filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+    map((event) => event.urlAfterRedirects),
     tap(() => this.searchedWord.set('')),
-    map((event) => {
-      const url = event.urlAfterRedirects;
+    startWith(this.router.url),
+    map((url) => {
       if (url.includes('/movies')) return 'movies';
       if (url.includes('/tv-series')) return 'tv-series';
       if (url.includes('/bookmarked')) return 'bookmarked';
@@ -55,28 +78,55 @@ export class MediaService {
   });
 
   private _media = toSignal(this.media$, { initialValue: [] });
-  media = computed(() =>
-    this._media().filter((m) => {
-      const word = this.searchedWord().toLocaleLowerCase();
+  media = computed(() => {
+    const rawItems = this._media();
+    const myBookmarks = this.bookmarkedIds();
+    const currentFilter = this.filter();
+    const word = this.searchedWord().toLocaleLowerCase();
 
+    const mergedItems = rawItems.map((item) => ({
+      ...item,
+      isBookmarked: myBookmarks.includes(item.id),
+    }));
+
+    return mergedItems.filter((m) => {
       let section = false;
-      if (this.filter() === 'movies') section = m.category === 'Movie';
-      else if (this.filter() === 'tv-series') section = m.category === 'TV Series';
-      else if (this.filter() === 'bookmarked') section = m.isBookmarked === true;
+      if (currentFilter === 'movies') section = m.category === 'Movie';
+      else if (currentFilter === 'tv-series') section = m.category === 'TV Series';
+      else if (currentFilter === 'bookmarked') section = m.isBookmarked === true;
       else section = true;
 
       if (!section) return false;
-
       if (!word) return true;
 
-      const category = m.category.toLowerCase().includes(word);
-      const rating = m.rating.toLowerCase().includes(word);
-      const title = m.title.toLowerCase().includes(word);
-      const year = m.year.toString().includes(word);
-
-      return (category || rating || title || year) && section;
-    }),
-  );
+      return (
+        m.title.toLowerCase().includes(word) ||
+        m.category.toLowerCase().includes(word) ||
+        m.rating.toLowerCase().includes(word) ||
+        m.year.toString().includes(word)
+      );
+    });
+  });
 
   trending = computed(() => this.media().filter((m) => m.isTrending));
+
+  async toggleBookmark(mediaId: string) {
+    const user = this.authService.currentUser();
+
+    if (!user) {
+      this.router.navigate(['/sign-in']);
+      return;
+    }
+
+    const userDocRef = doc(this.firestore, `users/${user.uid}`);
+    const isCurrentlyBookmarked = this.bookmarkedIds().includes(mediaId);
+
+    try {
+      await updateDoc(userDocRef, {
+        bookmarked: isCurrentlyBookmarked ? arrayRemove(mediaId) : arrayUnion(mediaId),
+      });
+    } catch (error) {
+      console.error('Failed to toggle bookmark', error);
+    }
+  }
 }

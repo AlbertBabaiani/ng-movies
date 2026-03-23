@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthService } from '../../core/auth-service';
 
 const NAV_LINKS = [
   { path: '/home', label: 'home', altText: 'Home' },
   { path: '/movies', label: 'movies', altText: 'Movies' },
   { path: '/tv-series', label: 'tv-series', altText: 'TV Series' },
-  { path: '/bookmarks', label: 'bookmark', altText: 'Bookmarks' },
+  { path: '/bookmarked', label: 'bookmark', altText: 'Bookmarks' },
 ];
 
 @Component({
@@ -16,4 +17,8 @@ const NAV_LINKS = [
 })
 export class Navbar {
   readonly links = NAV_LINKS;
+
+  private service = inject(AuthService);
+
+  user = this.service.currentUser;
 }

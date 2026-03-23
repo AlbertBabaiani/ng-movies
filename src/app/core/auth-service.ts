@@ -10,6 +10,7 @@ import {
 } from '@angular/fire/auth';
 import { doc, Firestore, setDoc } from '@angular/fire/firestore';
 import { LoadingService } from './loading-service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +18,7 @@ import { LoadingService } from './loading-service';
 export class AuthService {
   private auth = inject(Auth);
   private firestore = inject(Firestore);
+  private router = inject(Router);
 
   private loading = inject(LoadingService);
 
@@ -43,19 +45,23 @@ export class AuthService {
         email: user.email,
         bookmarked: [],
       });
+      this.router.navigate(['/home']);
     } catch (error) {
       console.error('Registration failed', error);
       // Todo: add errors
       throw error;
     } finally {
-      this.loading.stopProcess(); // 4. Always stop Spinner
+      this.loading.stopProcess();
     }
   }
 
   async login(email: string, password: string) {
     this.loading.startProcess();
     try {
-      return await signInWithEmailAndPassword(this.auth, email, password);
+      const result = await signInWithEmailAndPassword(this.auth, email, password);
+
+      this.router.navigate(['/home']);
+      return result;
     } finally {
       this.loading.stopProcess();
     }
@@ -64,7 +70,12 @@ export class AuthService {
   async logout() {
     this.loading.startProcess();
     try {
-      return await signOut(this.auth);
+      await signOut(this.auth);
+
+      this.router.navigate(['/sign-in']);
+    } catch (error) {
+      console.error('Logout failed', error);
+      throw error;
     } finally {
       this.loading.stopProcess();
     }

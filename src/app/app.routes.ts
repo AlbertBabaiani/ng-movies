@@ -3,12 +3,12 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: 'sign-up',
-    title: 'Sign Up',
+    title: 'Sign Up - NG Movies',
     loadComponent: () => import('./features/auth/signup/signup').then((c) => c.Signup),
   },
   {
     path: 'sign-in',
-    title: 'Sign In',
+    title: 'Sign In - NG Movies',
     loadComponent: () => import('./features/auth/signin/signin').then((c) => c.Signin),
   },
   {

@@ -1,6 +1,6 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { AuthService } from '../../../core/auth-service';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -11,7 +11,6 @@ import { FormsModule } from '@angular/forms';
 })
 export class Signup {
   private authService = inject(AuthService);
-  private router = inject(Router);
 
   email = signal('');
   password = signal('');
@@ -51,8 +50,6 @@ export class Signup {
       }
 
       await this.authService.register(this.email(), this.password());
-
-      this.router.navigate(['/home']);
     } catch (err) {}
   }
 }

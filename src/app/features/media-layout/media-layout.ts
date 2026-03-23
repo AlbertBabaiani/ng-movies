@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { Navbar } from '../../components/navbar/navbar';
 import { Search } from '../../components/search/search';
 import { IsLoadingDirective } from '../../shared/directives/is-loading';
-import { MediaService } from '../../core/media-service';
+import { LoadingService } from '../../core/loading-service';
 
 @Component({
   selector: 'app-media-layout',
@@ -12,7 +12,7 @@ import { MediaService } from '../../core/media-service';
   styleUrl: './media-layout.scss',
 })
 export class MediaLayout {
-  private mediaService = inject(MediaService);
+  private loadingService = inject(LoadingService);
 
-  isLoading = this.mediaService.isLoading;
+  isLoading = this.loadingService.isLoading;
 }

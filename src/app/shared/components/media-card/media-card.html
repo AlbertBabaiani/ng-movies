@@ -10,7 +10,12 @@
       />
     </picture>
 
-    <button type="button" class="bookmark-btn">
+    <button
+      type="button"
+      class="bookmark-btn"
+      [class.bookmarked]="media().isBookmarked"
+      (click)="toggle()"
+    >
       <img src="assets/images/shared/icon-bookmark-empty.svg" alt="" />
     </button>
   </div>
