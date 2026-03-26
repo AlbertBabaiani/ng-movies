@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { MediaLayout } from './media-layout';
+import { authGuard } from '../../core/guards/auth-guard';
 
 export const MEDIA_ROUTES: Routes = [
   {
@@ -25,6 +26,7 @@ export const MEDIA_ROUTES: Routes = [
       {
         path: 'bookmarked',
         title: 'Bookmarks - NG Movies',
+        canMatch: [authGuard],
         loadComponent: () => import('./bookmarks/bookmarks').then((c) => c.Bookmarks),
       },
       {

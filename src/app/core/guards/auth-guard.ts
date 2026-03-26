@@ -11,10 +11,10 @@ export const authGuard: CanMatchFn = (route, segments) => {
     take(1),
     map((user) => {
       if (user) {
-        return router.createUrlTree(['/']);
+        return true;
       }
 
-      return true;
+      return router.createUrlTree(['/sign-in']);
     }),
   );
 };

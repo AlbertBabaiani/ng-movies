@@ -1,4 +1,12 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  ElementRef,
+  HostListener,
+  inject,
+  signal,
+  viewChild,
+} from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../core/auth-service';
 
@@ -23,6 +31,19 @@ export class Navbar {
   isMenuOpen = signal(false);
 
   userEmail = computed(() => this.service.currentUser()?.email ?? 'Guest');
+
+  profileContainer = viewChild<ElementRef>('profileContainer');
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    if (
+      this.isMenuOpen() &&
+      this.profileContainer &&
+      !this.profileContainer()!.nativeElement.contains(event.target as Node)
+    ) {
+      this.closeMenu();
+    }
+  }
 
   toggleMenu() {
     this.isMenuOpen.update((v) => !v);
