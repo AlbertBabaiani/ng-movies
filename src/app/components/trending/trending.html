@@ -1,7 +1,12 @@
 <h2 class="section-title">Trending</h2>
 
 @if (trending().length > 0) {
-  <swiper-container slides-per-view="auto" [breakpoints]="swiperBreakpoints" free-mode="true">
+  <swiper-container
+    slides-per-view="auto"
+    [breakpoints]="swiperBreakpoints"
+    free-mode="true"
+    class="swiper"
+  >
     @for (media of trending(); track media.id) {
       <swiper-slide class="slide">
         <app-media-card

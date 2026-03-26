@@ -1,0 +1,4 @@
+<div class="snackbar" [class]="[type(), isVisible() ? 'visible' : '']">
+  <p>{{ message() }}</p>
+  <button class="close-btn" (click)="close()">✕</button>
+</div>

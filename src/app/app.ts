@@ -2,10 +2,11 @@ import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { LoadingService } from './core/loading-service';
 import { Spinner } from './shared/components/loading-spinner/spinner';
+import { Notification } from './shared/components/notification/notification';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Spinner],
+  imports: [RouterOutlet, Spinner, Notification],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })

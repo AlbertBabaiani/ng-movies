@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { MediaService } from '../../../core/media-service';
-import { Trending } from './trending/trending';
+import { Trending } from '../../../components/trending/trending';
 import { MediaGrid } from '../../../shared/components/media-grid/media-grid';
 
 @Component({

@@ -1,7 +1,9 @@
-@if (loadingService.isLoading()) {
+@if (isLoading()) {
   <div class="global-overlay">
     <app-spinner />
   </div>
 }
 
 <router-outlet />
+
+<app-notification />

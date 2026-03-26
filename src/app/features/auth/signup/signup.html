@@ -12,7 +12,7 @@
           placeholder="Email address"
           [(ngModel)]="email"
           name="email"
-          email
+          autocomplete="email"
           required
         />
       </div>
@@ -22,9 +22,9 @@
           [class.filled]="password().trim().length"
           [type]="showPassword() ? 'text' : 'password'"
           placeholder="Password"
-          [ngModel]="password()"
-          (ngModelChange)="password.set($event)"
+          [(ngModel)]="password"
           name="password"
+          autocomplete="new-password"
           required
         />
         <button type="button" class="eye-btn" (click)="togglePassword()">
@@ -51,8 +51,7 @@
           [class.filled]="repeatPassword().trim().length"
           [type]="showPassword() ? 'text' : 'password'"
           placeholder="Repeat password"
-          [ngModel]="repeatPassword()"
-          (ngModelChange)="repeatPassword.set($event)"
+          [(ngModel)]="repeatPassword"
           name="repeatPassword"
           required
         />
@@ -62,12 +61,18 @@
         <span class="error-msg">Passwords do not match</span>
       }
 
-      <button type="submit" class="submit-btn">Create an account</button>
+      <button type="submit" class="submit-btn" [disabled]="!isFormValid()">
+        Create an account
+      </button>
     </form>
 
     <p class="toggle-auth">
-      Already have an account
-      <a routerLink="/sign-in">Login</a>
+      Don't have an account?
+      <a routerLink="/sign-up">Sign Up</a>
+    </p>
+
+    <p class="toggle-guest">
+      <a class="guest-link" routerLink="/home"> Or continue as a guest </a>
     </p>
   </main>
 </div>

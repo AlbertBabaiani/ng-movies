@@ -13,9 +13,10 @@ import {
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { defer, Observable, of } from 'rxjs';
 import { NavigationEnd, Router } from '@angular/router';
-import { filter, finalize, map, startWith, switchMap, tap } from 'rxjs/operators';
+import { catchError, filter, finalize, map, startWith, switchMap, tap } from 'rxjs/operators'; // <-- Added catchError
 import { LoadingService } from './loading-service';
 import { AuthService } from './auth-service';
+import { NotificationService } from './notification-service';
 
 type Filter = 'movies-tv-series' | 'movies' | 'tv-series' | 'bookmarked';
 
@@ -25,6 +26,7 @@ type Filter = 'movies-tv-series' | 'movies' | 'tv-series' | 'bookmarked';
 export class MediaService {
   private authService = inject(AuthService);
   private loading = inject(LoadingService);
+  private notification = inject(NotificationService);
 
   private firestore = inject(Firestore);
   private router = inject(Router);
@@ -36,6 +38,10 @@ export class MediaService {
     return collectionData(this.mediaCollection, { idField: 'id' }) as Observable<MediaItem[]>;
   }).pipe(
     tap(() => this.loading.stopProcess()),
+    catchError((error) => {
+      this.notification.show('Failed to load media. Please try again later.', 'error');
+      return of([]);
+    }),
     finalize(() => this.loading.stopProcess()),
   );
 
@@ -43,8 +49,14 @@ export class MediaService {
     switchMap((user) => {
       if (!user) return of([]);
       const userDoc = doc(this.firestore, `users/${user.uid}`);
-      ``;
-      return docData(userDoc).pipe(map((data: any) => data?.bookmarked || []));
+
+      return docData(userDoc).pipe(
+        map((data: any) => data?.bookmarked || []),
+        catchError((error) => {
+          this.notification.show('Failed to load your bookmarks.', 'error');
+          return of([]);
+        }),
+      );
     }),
   );
 
@@ -126,7 +138,7 @@ export class MediaService {
         bookmarked: isCurrentlyBookmarked ? arrayRemove(mediaId) : arrayUnion(mediaId),
       });
     } catch (error) {
-      console.error('Failed to toggle bookmark', error);
+      this.notification.show('Failed to update bookmark. Please try again.', 'error');
     }
   }
 }

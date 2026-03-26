@@ -1,0 +1,254 @@
+:host {
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 4.8rem 2.4rem;
+  display: flex;
+  justify-content: center;
+
+  @media (min-width: 768px) {
+    padding: 8.8rem 0;
+  }
+}
+
+.auth-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.logo {
+  width: 3.2rem;
+  margin-bottom: 5.8rem;
+
+  @media (min-width: 768px) {
+    width: 4.6rem;
+    margin-bottom: 7.24rem;
+  }
+}
+
+.auth-card {
+  background-color: var(--bg-secondary);
+  width: 100%;
+  max-width: 40rem;
+  padding: 3rem 2.4rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 3.2rem;
+  font-weight: 300;
+  letter-spacing: -0.5px;
+  margin-bottom: 4rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+.input-group {
+  position: relative;
+}
+
+.input-group input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--secondary);
+  padding: 0 1.6rem 1.6rem 1.6rem;
+  color: var(--white);
+  font-size: 1.5rem;
+  font-family: inherit;
+  outline: none;
+  caret-color: var(--primary);
+  transition: border-bottom-color 0.3s ease;
+
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px var(--bg-secondary) inset !important;
+    -webkit-text-fill-color: var(--white) !important;
+    border-bottom: 1px solid var(--white) !important;
+  }
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 300;
+  }
+
+  &:focus,
+  &.filled {
+    border-bottom-color: var(--white);
+  }
+}
+
+.password-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  input {
+    padding-right: 4.5rem;
+  }
+
+  .eye-btn {
+    position: absolute;
+    right: 0.5rem;
+    top: 0;
+    height: 2.4rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    opacity: 0.7;
+    transition:
+      opacity 0.2s,
+      outline 0.1s;
+    filter: brightness(0) invert(1);
+
+    outline: 0px solid var(--white);
+    outline-offset: 4px;
+    border-radius: 2px;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &:focus-visible {
+      outline-width: 2px;
+    }
+
+    img {
+      width: 2rem;
+    }
+  }
+}
+
+.submit-btn {
+  background-color: var(--primary);
+  color: var(--white);
+  border: none;
+  border-radius: 0.6rem;
+  padding: 1.4rem;
+  font-size: 1.5rem;
+
+  font-family: inherit;
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    color 0.3s,
+    outline 0.1s,
+    opacity 0.3s;
+  margin-top: 1.6rem;
+  outline: 0px solid var(--primary);
+  outline-offset: 4px;
+
+  &:not(&:disabled):hover {
+    background-color: var(--white);
+    color: var(--bg-primary);
+  }
+
+  &:focus-visible {
+    outline-width: 2px;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: default;
+  }
+}
+
+.toggle-auth {
+  margin-top: 2.4rem;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 300;
+
+  a {
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--primary);
+    margin-left: 0.8rem;
+    outline: 0px solid var(--primary);
+    outline-offset: 4px;
+    border-radius: 2px;
+    transition:
+      color 0.3s,
+      outline 0.1s;
+
+    &:hover {
+      color: var(--white);
+    }
+
+    &:focus-visible {
+      outline-width: 2px;
+    }
+  }
+}
+
+.toggle-guest {
+  margin-top: 2rem;
+  text-align: center;
+
+  .guest-link {
+    background: transparent;
+    border: none;
+    font-family: inherit;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    padding: 0.4rem 0.8rem;
+    outline: 0px solid var(--primary);
+    outline-offset: 4px;
+    border-radius: 2px;
+    transition:
+      color 0.3s,
+      outline 0.1s;
+
+    &:hover {
+      color: var(--white);
+    }
+
+    &:focus-visible {
+      outline-width: 2px;
+    }
+  }
+}
+
+.error-msg {
+  display: block;
+  color: var(--primary);
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin-top: 0.8rem;
+  padding-left: 1.6rem;
+  animation: slideDown 0.2s ease-out;
+
+  &.auth-error {
+    text-align: center;
+    padding-left: 0;
+    margin-top: -1.2rem;
+    margin-bottom: 0.8rem;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
