@@ -33,15 +33,14 @@
   }
 }
 
-// 3. The Reel Spokes
 .spoke {
   position: absolute;
   top: 50%;
   left: 50%;
   width: 4px;
-  height: 90%;
+  height: calc(100% - 8px);
   background-color: var(--reel-color);
-  transform-origin: 50% 50%;
+  border-radius: 2px;
   opacity: 0.8;
 
   &:nth-child(1) {
@@ -52,31 +51,6 @@
   }
   &:nth-child(3) {
     transform: translate(-50%, -50%) rotate(120deg);
-  }
-}
-
-.perforation {
-  position: absolute;
-  top: 5px;
-  left: 50%;
-  width: 0.8rem;
-  height: 0.8rem;
-  background-color: var(--bg-primary, #10141e);
-  border-radius: 2px;
-  transform: translateX(-50%);
-
-  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
-
-  &:nth-child(4) {
-    top: auto;
-    bottom: 5px;
-  }
-
-  &:nth-child(5) {
-    top: 50%;
-    left: auto;
-    right: 5px;
-    transform: translateY(-50%);
   }
 }
 

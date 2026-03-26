@@ -1,8 +1,8 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, input } from '@angular/core';
-import { MediaCard } from '../../shared/components/media-card/media-card';
 
 import { register } from 'swiper/element/bundle';
-import { MediaItem } from '../../shared/models/mediaItem';
+import { MediaCard } from '../media-card/media-card';
+import { MediaItem } from '../../models/mediaItem';
 
 register();
 
