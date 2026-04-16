@@ -78,7 +78,7 @@ nav {
 
 .profile-toggle {
   background: none;
-  border: 1px solid transparent;
+  border: 2px solid transparent;
   padding: 0;
   cursor: pointer;
   border-radius: 50%;
@@ -129,9 +129,12 @@ nav {
 }
 
 .user-email {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
+  max-width: 20rem;
   margin: 0;
-  word-break: break-all;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .divider {

@@ -30,6 +30,7 @@ export class Navbar {
 
   isMenuOpen = signal(false);
 
+  isSignedIn = signal<boolean>(!!this.service.currentUser());
   userEmail = computed(() => this.service.currentUser()?.email ?? 'Guest');
 
   profileContainer = viewChild<ElementRef>('profileContainer');

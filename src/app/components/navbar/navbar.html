@@ -18,7 +18,7 @@
 
   <div class="profile-container" #profileContainer>
     <button class="profile-toggle" (click)="toggleMenu()" aria-label="Toggle user menu">
-      <img src="assets/images/shared/image-avatar.png" alt="Profile Image" />
+      <img src="assets/images/shared/profilePlaceholderSquare1.webp" alt="Profile Image" />
     </button>
 
     @if (isMenuOpen()) {
@@ -26,7 +26,9 @@
         <p class="user-email">{{ userEmail() }}</p>
         <hr class="divider" />
 
-        <button class="logout-btn" (click)="logout()">Logout</button>
+        <button class="logout-btn" (click)="logout()">
+          {{ isSignedIn() ? 'Logout' : 'Sign In' }}
+        </button>
       </div>
     }
   </div>
