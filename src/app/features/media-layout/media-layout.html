@@ -1,8 +1,8 @@
 <div class="app-container">
   <header app-navbar></header>
 
-  <main>
-    <section app-search></section>
+  <main [class.movie-preview]="isMovieRoute()">
+    <section app-search [hidden]="isMovieRoute()"></section>
 
     <router-outlet />
   </main>

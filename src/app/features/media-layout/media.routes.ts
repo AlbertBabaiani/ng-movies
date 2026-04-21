@@ -35,6 +35,11 @@ export const MEDIA_ROUTES: Routes = [
         loadComponent: () => import('./home/home').then((c) => c.Home),
       },
       {
+        path: 'movie/:id',
+        title: 'Movie - NG Movies',
+        loadComponent: () => import('./media-preview/media-preview').then((c) => c.MediaPreview),
+      },
+      {
         path: '**',
         redirectTo: 'home',
         pathMatch: 'full',

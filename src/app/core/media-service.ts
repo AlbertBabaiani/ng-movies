@@ -11,7 +11,7 @@ import {
   updateDoc,
 } from '@angular/fire/firestore';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { defer, Observable, of } from 'rxjs';
+import { combineLatest, defer, Observable, of } from 'rxjs';
 import { NavigationEnd, Router } from '@angular/router';
 import { catchError, filter, finalize, map, startWith, switchMap, tap } from 'rxjs/operators'; // <-- Added catchError
 import { LoadingService } from './loading-service';
@@ -140,5 +140,25 @@ export class MediaService {
     } catch (error) {
       this.notification.show('Failed to update bookmark. Please try again.', 'error');
     }
+  }
+
+  getMediaById(id: string): Observable<MediaItem | null> {
+    const docRef = doc(this.firestore, `media/${id}`);
+    const mediaDoc$ = docData(docRef, { idField: 'id' }) as Observable<MediaItem | undefined>;
+
+    return combineLatest([mediaDoc$, this.userBookmarks$]).pipe(
+      map(([media, bookmarks]) => {
+        if (!media) return null;
+
+        return {
+          ...media,
+          isBookmarked: bookmarks.includes(media.id),
+        };
+      }),
+      catchError((error) => {
+        this.notification.show('Failed to load movie details.', 'error');
+        return of(null);
+      }),
+    );
   }
 }

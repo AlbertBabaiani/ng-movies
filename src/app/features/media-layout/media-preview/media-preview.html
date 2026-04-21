@@ -1,0 +1,74 @@
+<article class="media-preview">
+  <button class="btn-back" (click)="goBack()">
+    <svg width="12" height="18" viewBox="0 0 14 20" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M12 2L4 10l8 8"
+        stroke="currentColor"
+        stroke-width="3"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+    Back
+  </button>
+
+  <div class="hero-banner">
+    <img
+      class="img-glow"
+      [src]="media()?.thumbnail?.regular?.large"
+      [alt]="media()?.title"
+      aria-hidden="true"
+    />
+
+    <img [src]="media()?.thumbnail?.regular?.large" [alt]="media()?.title" class="img-main" />
+  </div>
+
+  <div class="preview-content">
+    <h1 class="title">{{ media()?.title }}</h1>
+
+    <div class="metadata">
+      <span class="year"> {{ media()?.year }} </span>
+      <span class="dot">•</span>
+      <span class="rating"> {{ media()?.rating }} </span>
+      <span class="dot">•</span>
+      <span class="runtime">1h 54m</span>
+      <span class="dot">•</span>
+      <span class="category">
+        <img
+          [src]="
+            `assets/images/shared/icon-nav-${media()?.category === 'Movie' ? 'movies' : 'tv-series'}.svg`
+          "
+          alt="TV"
+          class="icon"
+        />
+        {{ media()?.category }}
+      </span>
+    </div>
+
+    <p class="synopsis">
+      When a lunar expedition discovers an ancient structure hidden in the shadows of the moon's
+      craters, a team of astronauts must uncover its origins before the silence of space drives them
+      to madness.
+    </p>
+
+    <div class="action-buttons">
+      <button class="btn-primary">
+        <img
+          src="assets/images/shared/icon-play-solid-full.svg"
+          class="play-icon"
+          alt="Play icon"
+        />
+        Play
+      </button>
+      <button class="btn-secondary" (click)="toggleBookmark()">
+        <img
+          [src]="
+            `assets/images/shared/icon-bookmark-${media()?.isBookmarked ? 'full' : 'empty'}.svg`
+          "
+          alt="Bookmark icon"
+        />
+      </button>
+    </div>
+  </div>
+</article>

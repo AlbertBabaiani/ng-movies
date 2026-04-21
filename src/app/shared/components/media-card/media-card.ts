@@ -1,10 +1,11 @@
 import { Component, inject, input } from '@angular/core';
 import { MediaItem } from '../../models/mediaItem';
 import { MediaService } from '../../../core/media-service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-media-card',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './media-card.html',
   styleUrl: './media-card.scss',
 })

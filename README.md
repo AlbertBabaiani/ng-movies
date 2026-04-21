@@ -29,7 +29,7 @@
 
 ## About The Project
 
-**NG Movies** is a sleek, fully responsive entertainment web application that allows users to discover, browse, and bookmark their favorite movies and TV series. Built with a strict mobile-first philosophy, it delivers a cinematic, app-like experience directly in the browser.
+**NG Movies** is a sleek, fully responsive entertainment web application that allows users to discover, browse, and bookmark their favorite movies and TV series, complete with immersive, dedicated preview pages for individual media titles. Built with a strict mobile-first philosophy, it delivers a cinematic, app-like experience directly in the browser.
 
 Beyond standard media browsing, the application features a robust authentication flow and a frictionless **Guest Mode**. Users can freely explore the content library without creating an account, but are intelligently prompted to sign in when attempting to save bookmarks. Once authenticated, users can seamlessly manage their curated lists via real-time cloud database syncing.
 
@@ -38,6 +38,8 @@ Beyond standard media browsing, the application features a robust authentication
 This project is engineered using cutting-edge Angular architectures and cloud services, showcasing best practices in performance, security, and UI/UX design:
 
 - **Modern Angular 20 Reactivity:** Completely drops RxJS observables in the UI layer in favor of Angular **Signals** (`signal`, `computed`). This provides granular, boilerplate-free state management and instantaneous DOM updates for form validation and media filtering.
+- **Cinematic Routing & Data Binding:** Leverages Angular's modern `withComponentInputBinding` to pass dynamic route parameters (`/movie/:id`) directly into component Signal inputs. The architecture includes state-preserving navigation via the `Location` service, ensuring users don't lose their scroll position or search queries when returning to the grid, alongside intelligent redirect fallbacks for invalid URLs.
+- **Hardware-Accelerated UI & Additive Light:** The media preview component utilizes advanced CSS techniques to mimic real-world ambient monitor lighting. By combining stacked images with GPU-accelerated heavy blurs (`transform: translateZ(0)`) and `mix-blend-mode: screen`, it creates a dynamic, content-aware glow that seamlessly fades into the dark UI using responsive `-webkit-mask-image` gradients.
 - **Advanced Routing & Security:** Implements modern Functional Route Guards (`canMatch`).
   - _Unauth Guard:_ Intelligently redirects already-logged-in users away from authentication pages.
   - _Auth Guard:_ Protects private routes (like `/bookmarked`) while safely lazily-loading public routes to drastically reduce initial bundle sizes.
@@ -50,28 +52,35 @@ This project is engineered using cutting-edge Angular architectures and cloud se
 
 ## Visual Showcase
 
-> **Note:** Insert your screenshots here once deployed.
+<div align="center">
+<h3>Desktop Experiences</h3>
+<img src="src/assets/previews/desktop-preview.png" alt="Desktop Interface showing the media grid and sidebar" width="800" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.5); margin-bottom: 20px;"/>
 
-<div align="center"> 
-  <h3>Desktop Experience</h3>
-  <img src="src/assets/previews/desktop-preview.png" alt="Desktop Interface showing the media grid and sidebar" width="800" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.5);"/>
+<img src="src/assets/previews/media-desktop-preview.png" alt="Detail Interface Desktop" width="800" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.5);"/>
 </div>
 
-<br/>
-
-<div align="center" style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
-  <div>
-    <h3>Tablet View</h3>
-    <img src="src/assets/previews/tablet-preview.png" alt="Tablet Interface showing top navigation" width="450" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.5);"/>
-  </div>
-  <div>
-    <h3>Mobile View & Nav</h3>
-    <img src="src/assets/previews/mobile-preview.png" alt="Mobile Interface showing responsive grid" height="550" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.5);"/>
-  </div>
+<div align="center">
+<h3>Responsive & Mobile Views</h3>
 </div>
 
----
-
+<table align="center" style="border: none; background-color: transparent;">
+<tr align="center">
+<td><b>Tablet View</b></td>
+<td><b>Mobile Grid</b></td>
+<td><b>Mobile Preview</b></td>
+</tr>
+<tr align="center" valign="top">
+<td>
+<img src="src/assets/previews/tablet-preview.png" alt="Tablet Interface showing top navigation" width="350" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.5);"/>
+</td>
+<td>
+<img src="src/assets/previews/mobile-preview.png" alt="Mobile Interface showing responsive grid" width="220" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.5);"/>
+</td>
+<td>
+<img src="src/assets/previews/media-mobile-preview.png" alt="Mobile Detail Interface" width="220" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.5);"/>
+</td>
+</tr>
+</table>
 ## Built With
 
 - **Angular 20** - Utilizing strictly Standalone Components, Signals, Functional Guards, and the modern Control Flow syntax (`@if`, `@for`).

@@ -31,5 +31,9 @@ main {
     padding-top: 6.5rem;
     height: 100vh;
     height: 100dvh;
+
+    &.movie-preview {
+      overflow: visible;
+    }
   }
 }

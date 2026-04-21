@@ -16,7 +16,12 @@
       [class.bookmarked]="media().isBookmarked"
       (click)="toggle()"
     >
-      <img src="assets/images/shared/icon-bookmark-empty.svg" alt="" />
+      <img src="assets/images/shared/icon-bookmark-empty.svg" alt="Bookmark" />
+    </button>
+
+    <button type="button" class="play-btn" [routerLink]="['/movie', media().id]">
+      <img src="assets/images/shared/icon-play.svg" alt="Play" />
+      Play
     </button>
   </div>
 
