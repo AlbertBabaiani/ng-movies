@@ -81,6 +81,7 @@ This project is engineered using cutting-edge Angular architectures and cloud se
 </td>
 </tr>
 </table>
+
 ## Built With
 
 - **Angular 20** - Utilizing strictly Standalone Components, Signals, Functional Guards, and the modern Control Flow syntax (`@if`, `@for`).
